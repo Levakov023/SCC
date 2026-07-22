@@ -1,11 +1,10 @@
+#pragma once
 
-#ifndef SCANNER_TOKEN_H
-#define SCANNER_TOKEN_H
 #include <string_view>
 
 enum class TokenType {
     Ident, IntLit, Plus, Minus, Star, Slash, Assign,
-    Eq, Le, Ge, Lt, Gt, If, While, Return, Eof, Error
+    Eq, Le, Ge, Lt, Gt, If, While, Return, Eof, None
 };
 
 struct Token {
@@ -15,5 +14,3 @@ struct Token {
     std::size_t col;
 
 };
-
-#endif //SCANNER_TOKEN_H
