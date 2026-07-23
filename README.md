@@ -6,7 +6,7 @@ front-end, built incrementally. Currently just the scanner, parser is next.
 
 ## Scanner
 
-Hand-derived DFAs for ~10 token types (see [Scanner/explanations/RE.md](Scanner/explanations/RE.md)
+Hand-derived DFAs for ~10 token types (see [Scanner/explanation/RE.md](Scanner/explanation/RE.md)
 for the REs, NFAs, and subset construction work), compiled into a table-driven
 scanner in C++. Handles maximal-munch tokenization with rollback for cases
 where the DFA overshoots a valid token boundary.
