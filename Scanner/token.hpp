@@ -3,8 +3,11 @@
 #include <string_view>
 
 enum class TokenType {
-    Ident, IntLit, Plus, Minus, Star, Slash, Assign,
-    Eq, Le, Ge, Lt, Gt, If, While, Return, Eof, None
+    Ident, IntLit, Plus,
+    Minus, Star, Slash,
+    Assign, Eq, Le,
+    Ge, Lt, Gt,
+    If, While, Return, Eof, None, Error
 };
 
 struct Token {
