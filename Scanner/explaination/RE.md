@@ -17,8 +17,8 @@ double circle marks accepting state of a DFA.
 
 # IntLit
 
-Integer literal, same thing as Identifier, identified as a single number 1-9 followed by 
-zero or more 0-9 digits, or a single 0.
+Integer literal, the same thing as Identifier, identified as a single digit 1-9 followed by 
+zero or more digits 0-9, or a single 0.
 
 - RE : `0|[1-9][0-9]*`
 
@@ -32,5 +32,27 @@ zero or more 0-9 digits, or a single 0.
 
 ![plusMinusStarSlash.png](plusMinusStarSlash.png)
 
-# `<=, ==, > , >=` cluster
+# `<, =, <=, ==, > , >=` cluster
 
+For < > == = <= >=, an RE isn't enough on its own 
+several of these tokens share a prefix (< is a prefix of <=, = is a prefix of ==),
+so building the DFA directly by hand risks merging or misordering states incorrectly.
+This cluster is where Thompson's construction and subset construction actually earn their keep, unlike the single-character operators or Ident/IntLit, which are simple enough to reason to a DFA directly.
+
+![nfas.png](nfas.png)
+Each token gets its own independent NFA branch off a shared start state 
+(via epsilon transitions), keeping its own accept state distinct even where paths overlap.
+
+![combinedNFA.png](combinedNFA.png)
+
+Subset construction then merges these into one DFA,
+correctly resolving the overlap: reading < alone lands in an accepting state for Lt,
+but that same state has an outgoing transition on = into a further accepting state for Le
+, the DFA below shows exactly how that merge falls out.
+
+![subsetConstruction.png](subsetConstruction.png)
+
+
+![DFAforCluster.png](DFAforCluster.png)
+
+After this, we got all the DFA's we need to continue with scanner table generation.
